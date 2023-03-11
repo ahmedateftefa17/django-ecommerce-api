@@ -18,7 +18,7 @@ from django.urls import path, include
 
 from rest_framework.authtoken import views
 
-from api.views import register_view, products_view, cart_items_view
+from api.views import register_view, products_view, cart_items_view, orders_view, orders_pk_view
 
 
 urlpatterns = [
@@ -27,5 +27,7 @@ urlpatterns = [
     path('api/auth/register/', register_view),
     path('api/products/', products_view),
     path('api/cart_items/', cart_items_view),
+    path('api/orders/', orders_view),
+    path('api/orders/<int:pk>', orders_pk_view),
     path('api/auth/', include('rest_framework.urls')),
 ]
