@@ -21,6 +21,11 @@ class OrdersAPIView(generics.ListCreateAPIView):
 
         cart_items = CartItemModel.objects.filter(cart=cart.id).all()
 
+        if len(cart_items) == 0:
+            return Response({
+                'cart': 'Cart is empty!',
+            }, status=status.HTTP_400_BAD_REQUEST)
+
         order = OrderModel.objects.create(user=user)
         for cart_item in cart_items:
             OrderItemModel.objects.create(
