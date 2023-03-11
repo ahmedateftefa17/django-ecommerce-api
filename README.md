@@ -130,3 +130,12 @@ Fields:
 ```
 #### Headers:
 * Authorization: Token {token}
+
+
+## Online Instance
+https://ahmedateftefa17.pythonanywhere.com/
+### Admin Data
+```
+Username: admin
+Password: admin
+```
