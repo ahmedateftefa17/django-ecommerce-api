@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.response import Response
 
-from ..serializers.Product import Product as ProductSerializer
-from ..models.Product import Product as ProductModel
+from ..serializers.product import Product as ProductSerializer
+from ..models.product import Product as ProductModel
 
 
 class products(generics.ListAPIView):
