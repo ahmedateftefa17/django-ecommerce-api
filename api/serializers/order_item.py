@@ -10,7 +10,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItemModel
-        fields = ('product', 'qty', 'subtotal')
+        fields = ('product', 'price', 'qty', 'subtotal')
 
     def get_subtotal(self, order_item):
-        return order_item.qty * order_item.product.price
+        return order_item.qty * order_item.price

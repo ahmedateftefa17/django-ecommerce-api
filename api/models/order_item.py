@@ -9,4 +9,5 @@ class OrderItem(models.Model):
         OrderModel, related_name='order', on_delete=models.CASCADE)
     product = models.ForeignKey(
         ProductModel, related_name='order_product', on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
     qty = models.DecimalField(max_digits=12, decimal_places=3)

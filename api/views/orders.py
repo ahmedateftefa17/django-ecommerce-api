@@ -24,7 +24,7 @@ class OrdersAPIView(generics.ListCreateAPIView):
         order = OrderModel.objects.create(user=user)
         for cart_item in cart_items:
             OrderItemModel.objects.create(
-                order=order, product=cart_item.product, qty=cart_item.qty)
+                order=order, product=cart_item.product, price=cart_item.product.price, qty=cart_item.qty)
             cart_item.delete()
 
         cart.delete()

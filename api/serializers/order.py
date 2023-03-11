@@ -16,7 +16,7 @@ class OrderSerializer(serializers.ModelSerializer):
     def get_subtotal(self, obj):
         subtotal = 0
         for order_item in obj.order.all():
-            subtotal += order_item.qty * order_item.product.price
+            subtotal += order_item.qty * order_item.price
         return subtotal
 
     def get_total_qty(self, obj):
