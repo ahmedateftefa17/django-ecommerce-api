@@ -20,6 +20,7 @@ from rest_framework.authtoken import views
 
 from api.views.register import register_view
 from api.views.products import products_view
+from api.views.cart_items import cart_items_view
 
 
 urlpatterns = [
@@ -27,5 +28,6 @@ urlpatterns = [
     path('api/auth/token/', views.obtain_auth_token),
     path('api/auth/register/', register_view),
     path('api/products/', products_view),
+    path('api/cart_items/', cart_items_view),
     path('api/auth/', include('rest_framework.urls')),
 ]
