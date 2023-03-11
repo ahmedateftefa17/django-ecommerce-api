@@ -33,7 +33,7 @@ python manage.py runserver
 ## PostMan Collection for APIs
 https://documenter.getpostman.com/view/3741025/2s93JtQ3zP
 
-## API End-Pints
+## API Endpoints
 ```
 {api_url} = http://127.0.0.1:8000/api
 ```
