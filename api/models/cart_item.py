@@ -8,5 +8,5 @@ class CartItem(models.Model):
     cart = models.ForeignKey(
         CartModel, related_name='cart', on_delete=models.CASCADE)
     product = models.ForeignKey(
-        ProductModel, related_name='product', on_delete=models.CASCADE)
+        ProductModel, related_name='cart_product', on_delete=models.CASCADE)
     qty = models.DecimalField(max_digits=12, decimal_places=3)
