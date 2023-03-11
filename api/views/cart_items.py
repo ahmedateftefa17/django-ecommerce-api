@@ -7,9 +7,6 @@ from ..serializers import CartItem as CartItemSerializer
 
 
 class CartItems(generics.ListCreateAPIView):
-    queryset = CartItemModel.objects.all()
-    serializer_class = CartItemSerializer
-
     def create(self, request):
         product_id = request.data['product']
 
