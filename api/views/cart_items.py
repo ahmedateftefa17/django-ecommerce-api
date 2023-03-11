@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from ..models import Cart as CartModel, CartItem as CartItemModel, Product as ProductModel
-from ..serializers import CartItem as CartItemSerializer
+from ..serializers import CartItem as CartItemSerializer, Cart as CartSerializer
 
 
 class CartItems(generics.ListCreateAPIView):
@@ -33,20 +33,7 @@ class CartItems(generics.ListCreateAPIView):
             cart_item = CartItemModel.objects.create(
                 cart=cart, product=product, qty=1)
 
-        cart_items = CartItemModel.objects.filter(cart=cart.id).all()
-        cart_items_serializer = CartItemSerializer(cart_items, many=True)
-
-        subtotal = 0
-        total_qty = 0
-        for cart_item in cart_items:
-            subtotal += cart_item.qty * cart_item.product.price
-            total_qty += cart_item.qty
-
-        return Response({
-            'items': cart_items_serializer.data,
-            'subtotal': subtotal,
-            'total_qty': total_qty,
-        })
+        return Response(CartSerializer(cart, many=False).data)
 
     def list(self, request):
         user = request.user
@@ -63,17 +50,7 @@ class CartItems(generics.ListCreateAPIView):
                 'total_qty': total_qty,
             })
 
-        cart_items = CartItemModel.objects.filter(cart=cart.id).all()
-        cart_items_serializer = CartItemSerializer(cart_items, many=True)
-        for cart_item in cart_items:
-            subtotal += cart_item.qty * cart_item.product.price
-            total_qty += cart_item.qty
-
-        return Response({
-            'items': cart_items_serializer.data,
-            'subtotal': subtotal,
-            'total_qty': total_qty,
-        })
+        return Response(CartSerializer(cart, many=False).data)
 
 
 cart_items_view = CartItems.as_view()

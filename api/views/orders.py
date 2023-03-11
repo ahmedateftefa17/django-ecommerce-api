@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from ..models import Cart as CartModel, CartItem as CartItemModel, Order as OrderModel, OrderItem as OrderItemModel
-from ..serializers import OrderItem as OrderItemSerializer
+from ..serializers import Order as OrderSerializer
 
 
 class Orders(generics.ListCreateAPIView):
@@ -27,47 +27,14 @@ class Orders(generics.ListCreateAPIView):
 
         cart.delete()
 
-        order_items = OrderItemModel.objects.filter(order=order.id).all()
-        order_items_serializer = OrderItemSerializer(order_items, many=True)
-
-        subtotal = 0
-        total_qty = 0
-        for order_item in order_items:
-            subtotal += order_item.qty * order_item.product.price
-            total_qty += order_item.qty
-
-        return Response({
-            'items': order_items_serializer.data,
-            'subtotal': subtotal,
-            'total_qty': total_qty,
-        })
+        return Response(OrderSerializer(order, many=False).data)
 
     def list(self, request):
         user = request.user
 
         orders = OrderModel.objects.filter(user=user.id).all()
 
-        orders_list = []
-
-        for order in orders:
-            order_items = OrderItemModel.objects.filter(order=order.id).all()
-            order_items_serializer = OrderItemSerializer(
-                order_items, many=True)
-
-            subtotal = 0
-            total_qty = 0
-            for order_item in order_items:
-                subtotal += order_item.qty * order_item.product.price
-                total_qty += order_item.qty
-
-            orders_list.append({
-                'id': order.id,
-                'items': order_items_serializer.data,
-                'subtotal': subtotal,
-                'total_qty': total_qty,
-            })
-
-        return Response(orders_list)
+        return Response(OrderSerializer(orders, many=True).data)
 
 
 class OrdersPK(generics.RetrieveAPIView):
@@ -81,20 +48,7 @@ class OrdersPK(generics.RetrieveAPIView):
                 'order': 'Order does not exist!',
             }, status=status.HTTP_404_NOT_FOUND)
 
-        order_items = OrderItemModel.objects.filter(order=order.id).all()
-        order_items_serializer = OrderItemSerializer(order_items, many=True)
-
-        subtotal = 0
-        total_qty = 0
-        for order_item in order_items:
-            subtotal += order_item.qty * order_item.product.price
-            total_qty += order_item.qty
-
-        return Response({
-            'items': order_items_serializer.data,
-            'subtotal': subtotal,
-            'total_qty': total_qty,
-        })
+        return Response(OrderSerializer(order).data)
 
 
 orders_view = Orders.as_view()
