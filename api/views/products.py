@@ -1,11 +1,11 @@
 from rest_framework import generics
 from rest_framework.response import Response
 
-from ..models import Product as ProductModel
-from ..serializers import Product as ProductSerializer
+from ..models import ProductModel
+from ..serializers import ProductSerializer
 
 
-class Products(generics.ListAPIView):
+class ProductsAPIView(generics.ListAPIView):
     queryset = ProductModel.objects
     serializer_class = ProductSerializer
 
@@ -29,4 +29,4 @@ class Products(generics.ListAPIView):
         return Response(serializer.data)
 
 
-products_view = Products.as_view()
+products_api_view = ProductsAPIView.as_view()

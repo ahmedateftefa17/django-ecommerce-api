@@ -2,11 +2,11 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
 
-from ..models import Cart as CartModel, CartItem as CartItemModel, Product as ProductModel
-from ..serializers import CartItem as CartItemSerializer, Cart as CartSerializer
+from ..models import CartModel, CartItemModel, ProductModel
+from ..serializers import CartSerializer
 
 
-class CartItems(generics.ListCreateAPIView):
+class CartItemsAPIView(generics.ListCreateAPIView):
     def create(self, request):
         product_id = request.data['product']
 
@@ -53,4 +53,4 @@ class CartItems(generics.ListCreateAPIView):
         return Response(CartSerializer(cart, many=False).data)
 
 
-cart_items_view = CartItems.as_view()
+cart_items_api_view = CartItemsAPIView.as_view()

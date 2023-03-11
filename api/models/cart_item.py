@@ -1,7 +1,7 @@
 from django.db import models
 
-from ..models import Product as ProductModel
-from ..models import Cart as CartModel
+from ..models import ProductModel
+from ..models import CartModel
 
 
 class CartItem(models.Model):

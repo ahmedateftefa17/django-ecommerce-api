@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from ..models import Cart as CartModel
-from ..serializers import CartItem as CartItemSerializer
+from ..models import CartModel
+from ..serializers import CartItemSerializer
 
 
-class Cart(serializers.ModelSerializer):
+class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(source='cart', many=True)
     subtotal = serializers.SerializerMethodField()
     total_qty = serializers.SerializerMethodField()

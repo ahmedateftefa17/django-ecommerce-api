@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from ..models import OrderItem as OrderItemModel
-from ..serializers import Product as ProductSerializer
+from ..models import OrderItemModel
+from ..serializers import ProductSerializer
 
 
-class OrderItem(serializers.ModelSerializer):
+class OrderItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(many=False)
     subtotal = serializers.SerializerMethodField('get_subtotal')
 

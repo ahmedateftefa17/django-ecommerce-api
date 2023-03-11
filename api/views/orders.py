@@ -2,11 +2,11 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
 
-from ..models import Cart as CartModel, CartItem as CartItemModel, Order as OrderModel, OrderItem as OrderItemModel
-from ..serializers import Order as OrderSerializer
+from ..models import CartModel, CartItemModel, OrderModel, OrderItemModel
+from ..serializers import OrderSerializer
 
 
-class Orders(generics.ListCreateAPIView):
+class OrdersAPIView(generics.ListCreateAPIView):
     def create(self, request):
         user = request.user
 
@@ -37,7 +37,7 @@ class Orders(generics.ListCreateAPIView):
         return Response(OrderSerializer(orders, many=True).data)
 
 
-class OrdersPK(generics.RetrieveAPIView):
+class OrdersPKAPIView(generics.RetrieveAPIView):
     def retrieve(self, request, pk):
         user = request.user
 
@@ -51,5 +51,5 @@ class OrdersPK(generics.RetrieveAPIView):
         return Response(OrderSerializer(order).data)
 
 
-orders_view = Orders.as_view()
-orders_pk_view = OrdersPK.as_view()
+orders_api_view = OrdersAPIView.as_view()
+orders_pk_api_view = OrdersPKAPIView.as_view()

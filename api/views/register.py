@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 
-from ..serializers import Register as RegisterSerializer
+from ..serializers import RegisterSerializer
 
 
-class Register(generics.CreateAPIView):
+class RegisterAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
 
-register_view = Register.as_view()
+register_api_view = RegisterAPIView.as_view()

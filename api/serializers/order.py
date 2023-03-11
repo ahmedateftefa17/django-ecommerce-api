@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from ..models import Order as OrderModel
-from ..serializers import OrderItem as OrderItemSerializer
+from ..models import OrderModel
+from ..serializers import OrderItemSerializer
 
 
-class Order(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(source='order', many=True)
     subtotal = serializers.SerializerMethodField()
     total_qty = serializers.SerializerMethodField()
