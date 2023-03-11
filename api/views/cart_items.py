@@ -55,4 +55,29 @@ class CartItemsAPIView(generics.ListCreateAPIView):
         return Response(CartSerializer(cart, many=False).data)
 
 
+class CartItemsPKAPIView(generics.DestroyAPIView):
+    serializer_class = CartSerializer
+
+    def destroy(self, request, pk):
+        try:
+            product = ProductModel.objects.filter(pk=pk).get()
+        except:
+            return Response({
+                'product': 'Product does not exist!',
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        user = request.user
+
+        try:
+            cart = CartModel.objects.filter(user=user.id).get()
+        except:
+            cart = CartModel.objects.create(user=user)
+
+        CartItemModel.objects.filter(
+            cart=cart.id, product=product.id).delete()
+
+        return Response(CartSerializer(cart, many=False).data)
+
+
 cart_items_api_view = CartItemsAPIView.as_view()
+cart_items_pk_api_view = CartItemsPKAPIView.as_view()
