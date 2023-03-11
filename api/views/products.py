@@ -27,3 +27,6 @@ class Products(generics.ListAPIView):
         serializer = ProductSerializer(queryset, many=True)
 
         return Response(serializer.data)
+
+
+products_view = Products.as_view()

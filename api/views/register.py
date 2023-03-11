@@ -10,3 +10,6 @@ class Register(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
+
+
+register_view = Register.as_view()

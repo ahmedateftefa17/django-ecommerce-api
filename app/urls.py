@@ -18,14 +18,14 @@ from django.urls import path, include
 
 from rest_framework.authtoken import views
 
-from api.views.register import Register
-from api.views.products import Products
+from api.views.register import register_view
+from api.views.products import products_view
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/token/', views.obtain_auth_token),
-    path('api/auth/register/', Register.as_view()),
-    path('api/products/', Products.as_view()),
+    path('api/auth/register/', register_view),
+    path('api/products/', products_view),
     path('api/auth/', include('rest_framework.urls')),
 ]
