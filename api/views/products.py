@@ -12,14 +12,14 @@ class Products(generics.ListAPIView):
     def list(self, request):
         queryset = self.get_queryset()
 
-        if 'search_term' in request.GET and len(request.GET.get('search_term')) > 0:
+        if len(request.query_params.get('search_term', '')) > 0:
             queryset = queryset.filter(
-                name__contains=request.GET.get('search_term'))
+                name__contains=request.query_params['search_term'])
 
-        if 'sort_by_price' in request.GET and request.GET.get('sort_by_price') == 'htl':
+        if request.query_params.get('sort_by_price', '') == 'htl':
             queryset = queryset.order_by('-price')
 
-        if 'search_term' in request.GET and request.GET.get('sort_by_price') == 'lth':
+        if request.query_params.get('sort_by_price', '') == 'lth':
             queryset = queryset.order_by('price')
 
         queryset = queryset.all()
