@@ -7,6 +7,8 @@ from ..serializers import OrderSerializer
 
 
 class OrdersAPIView(generics.ListCreateAPIView):
+    serializer_class = OrderModel
+
     def create(self, request):
         user = request.user
 
@@ -38,6 +40,8 @@ class OrdersAPIView(generics.ListCreateAPIView):
 
 
 class OrdersPKAPIView(generics.RetrieveAPIView):
+    serializer_class = OrderModel
+
     def retrieve(self, request, pk):
         user = request.user
 

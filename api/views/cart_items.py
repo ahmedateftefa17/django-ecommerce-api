@@ -7,6 +7,8 @@ from ..serializers import CartSerializer
 
 
 class CartItemsAPIView(generics.ListCreateAPIView):
+    serializer_class = CartSerializer
+
     def create(self, request):
         product_id = request.data['product']
 
