@@ -29,11 +29,11 @@ class CartItemsAPIView(generics.ListCreateAPIView):
         try:
             cart_item = CartItemModel.objects.filter(
                 cart=cart.id, product=product.id).get()
-            cart_item.qty += 1
+            cart_item.qty = request.data['qty']
             cart_item.save()
         except:
             cart_item = CartItemModel.objects.create(
-                cart=cart, product=product, qty=1)
+                cart=cart, product=product, qty=request.data['qty'])
 
         return Response(CartSerializer(cart, many=False).data)
 
