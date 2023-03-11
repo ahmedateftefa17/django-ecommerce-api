@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from ..models import Cart as CartModel, CartItem as CartItemModel, Product as ProductModel
-from ..serializers.cart_item import CartItem as CartItemSerializer
+from ..serializers import CartItem as CartItemSerializer
 
 
 class CartItems(generics.ListCreateAPIView):
