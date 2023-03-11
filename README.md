@@ -82,6 +82,18 @@ Fields:
 * Authorization: Token {token}
 #### Fields:
 * product: (REQUIRED) Product ID
+* qty: (REQUIRED) Product Qty
+
+---
+
+### Remove Product from Cart:
+```
+[POST] {api_url}/cart_items/<int:pk>
+```
+#### Headers:
+* Authorization: Token {token}
+#### URL Variables:
+* pk: (REQUIRED) Product ID
 
 ---
 
