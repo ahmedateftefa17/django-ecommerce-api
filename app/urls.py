@@ -18,9 +18,7 @@ from django.urls import path, include
 
 from rest_framework.authtoken import views
 
-from api.views.register import register_view
-from api.views.products import products_view
-from api.views.cart_items import cart_items_view
+from api.views import register_view, products_view, cart_items_view
 
 
 urlpatterns = [
